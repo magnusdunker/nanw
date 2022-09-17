@@ -16,6 +16,10 @@ function App() {
     // setErrors({ ...errors, step1Input7: "Der er fandme fejl her" });
     return true;
   }
+  function handleTextChange(e: any) {
+    setState({ ...state, [e.target.name]: e.target.value });
+  }
+  
   return (
     <div className="App">
       <Nanw
@@ -27,7 +31,7 @@ function App() {
         onCancel={(e) => console.log("onCancel" + e)}
       >
         <Step validate={handleStep1Validate}>
-          <input type="text" {...TextHandler(state, "step1Input0", setState, errors)} />
+          <input type="text" name="step1Input0" onChange={handleTextChange} value={state.step1Input0} />
           <input type="text" {...TextHandler(state, "step1Input5", setState, errors)} />
           <input type="text" {...TextHandler(state, "step1Input6", setState, errors)} />
           <input type="text" {...TextHandler(state, "step1Input7", setState, errors)} />
