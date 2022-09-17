@@ -1,0 +1,6 @@
+- **√** Alle steps har adgang til al data 
+- Valideringsregler der ligeledes per step har adgang til al data
+- **√** Mulighed for ekstra knapper per step
+- **√** Mulighed for at skjule og disable knapper per step, enten pga valideringsregler eller globale regler (f.eks. er der nogle Wizards hvor det ikke skal være muligt at gå tilbage når man først har udfyldt første step - men den her er meget unik, så nok ikke en "must have"/global applicable ting)
+- **√** Event emitters alle steder, som man kan subscribe på alle steder
+- **√** Et slags view / edit gøgl hvor man kan få alle steps renderet (ala det der vi lavede med redux til Philip Wizarden), men det er nok mere en UI ting der genbruger din funktionalitet. Men i det tilfælde skal valideringsreglerne jo så kunne køres allesammen inden et "save"-event

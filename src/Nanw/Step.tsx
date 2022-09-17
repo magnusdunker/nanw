@@ -1,10 +1,9 @@
-import { Component } from "react";
-
-export class Page3 extends Component<{ children: any }> {
-  render() {
-    return <div>{this.props.children}</div>;
-  }
+export type disableAbleButtons = "ok" | "cancel" | "next" | "prev";
+export interface IStepProps {
+  children: any;
+  extraButtons?: { onClick: (e: any) => void; title: string }[];
+  disableButtons?: disableAbleButtons[];
 }
-export function Step(props: { children: any }) {
+export function Step(props: IStepProps) {
   return <div>{props.children}</div>;
 }

@@ -16,6 +16,7 @@ function App() {
   return (
     <div className="App">
       <Nanw
+        showAll
         ref={nvnwRef}
         onStepChange={(step) => {
           console.log("onStepChange" + step);
@@ -30,8 +31,19 @@ function App() {
         <Step>
           <input type="text" name="step1Input1" onChange={handleOnChange} />
         </Step>
-        <Step>step1Input0 = {data.step1Input0}</Step>
-        <Step>Step3</Step>
+        <Step
+          extraButtons={[
+            {
+              onClick: (e) => {
+                console.log(e);
+              },
+              title: "Click me",
+            },
+          ]}
+        >
+          step1Input0 = {data.step1Input0}
+        </Step>
+        <Step disableButtons={["next"]}>Step3</Step>
         <Step>Step4</Step>
       </Nanw>
       <div>{JSON.stringify(data)}</div>
@@ -39,5 +51,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
