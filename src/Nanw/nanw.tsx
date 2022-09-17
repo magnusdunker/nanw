@@ -3,7 +3,7 @@ import { IStepProps } from "./Step";
 interface INanw {
   children: ReactElement[];
   step?: number;
-  onStepChange?: (step: number) => boolean;
+  onStepChange?: (step: number) => void;
   onOk?: (step: number) => void;
   onCancel?: (step: number) => void;
   showAll?: boolean;
@@ -20,15 +20,15 @@ export const Nanw = forwardRef((props: INanw, ref) => {
   useEffect(() => {
     setInternalStep(step || 0);
   }, [step]);
+  const currentStepProps = children[internalStep].props as IStepProps;
 
   function handleStepChange(step: number) {
     if (step >= 0 && step < children.length) {
-      if (onStepChange && onStepChange(step)) {
-        setInternalStep(step);
+      if (currentStepProps.validate && !currentStepProps.validate()) {
+        return;
       }
-      if (!onStepChange) {
-        setInternalStep(step);
-      }
+      onStepChange && onStepChange(step);
+      setInternalStep(step);
     }
   }
   function handleOnOk() {
@@ -38,7 +38,6 @@ export const Nanw = forwardRef((props: INanw, ref) => {
   function setStep(step: number) {
     setInternalStep(step);
   }
-  const currentStepProps = children[internalStep].props as IStepProps;
   return (
     <>
       {!showAll && (
@@ -52,11 +51,11 @@ export const Nanw = forwardRef((props: INanw, ref) => {
         </>
       )}
       {showAll && (
-          <div>
-            {children.map((x: any, i: number) => (
-              <span key={i + "Step"}>{x}</span>
-            ))}
-          </div>
+        <div>
+          {children.map((x: any, i: number) => (
+            <span key={i + "Step"}>{x}</span>
+          ))}
+        </div>
       )}
       <input
         type="button"
@@ -80,3 +79,10 @@ export const Nanw = forwardRef((props: INanw, ref) => {
     </>
   );
 });
+export function TextHandler(state: any, propName: string, setState: any, errors: any) {
+  return {
+    value: state[propName],
+    onChange: (e: any) => setState({ ...state, [propName]: e.target.value }),
+    disabled: errors[propName], 
+  };
+}
