@@ -16,7 +16,6 @@ function App() {
   return (
     <div className="App">
       <Nanw
-        showAll
         ref={nvnwRef}
         onStepChange={(step) => {
           console.log("onStepChange" + step);
